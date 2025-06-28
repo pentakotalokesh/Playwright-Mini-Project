@@ -1,5 +1,5 @@
 import { test, expect } from "../fixtures/testSetup";
-import { HomePage } from "../pages/homePage";
+import { HomePage } from "../pages/HomePage";
 import { Navbar } from "../components/Navbar";
 import { CollegeSearchPage } from "../pages/CollegeSearchPage";
 import { collegeFilterData } from "../utils/testData";
