@@ -5,3 +5,14 @@ export const schoolFilterData = {
   ],
   invalid: [{ syllabus: "CBSE", city: "FakeCity" }],
 };
+
+export const collegeFilterData = {
+  valid: [
+    { branch: "Architecture", city: "Agra" },
+    { branch: "Engineering & Technology", city: "Agra" },
+  ],
+  invalid: [
+    { branch: "", city: "" },
+    { branch: "", city: "" },
+  ],
+};

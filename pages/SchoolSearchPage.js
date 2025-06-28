@@ -1,8 +1,8 @@
-export class SchoolSearchPage {
+import { BasePage } from "./BasePage";
+
+export class SchoolSearchPage extends BasePage {
   constructor(page) {
-    this.page = page;
-    this.dropdownCategory = page.locator("#ddl_Category");
-    this.dropdownCity = page.locator("#ddl_City");
+    super(page);
     this.searchBtn = page.locator("#btnSearch");
     this.resultSection = page.locator(".box-content");
   }
@@ -10,10 +10,25 @@ export class SchoolSearchPage {
   //Search schools according to the category and city
   async searchSchools(category, city) {
     try {
+      const isSyllbusValueValid = await this.optionExists(
+        category,
+        this.dropdownCategory
+      );
+
+      const isCityValueValid = await this.optionExists(city, this.dropdownCity);
+      /* for debugging purpose
+      console.log(isCityValueValid);
+      console.log(isSyllbusValueValid);
+      */
+      if (!isCityValueValid || !isSyllbusValueValid) {
+        console.warn("No option is there");
+        return;
+      }
       await this.dropdownCategory.click();
       await this.dropdownCategory.selectOption({ label: category });
       await this.dropdownCity.click();
       await this.dropdownCity.selectOption({ label: city });
+      await this.searchBtn.click();
     } catch (err) {
       console.log("search Schools Failed");
     }
