@@ -4,7 +4,7 @@ export class CollegeSearchPage extends BasePage {
   constructor(page) {
     super(page);
     this.searchBtn = this.page.locator("#btnSearch");
-    this.resultSection = this.page.locator(".filter-result");
+    // this.resultSection = this.page.locator("#pnllist .detail-list ul li");
     /*
     this.items = this.page.locator(
       ".box-content > .filter-result > .detail-list > #pnllist > .detail-list > ul > li"
@@ -14,19 +14,25 @@ export class CollegeSearchPage extends BasePage {
   //searchColleges Method
   async searchColleges(branch, city) {
     try {
+      //Checking weather given branch option is there or not
       const isBranchValid = await this.optionExists(
         branch,
         this.dropdownCategory
       );
+      //Checking weather given city option is there is not
       const isCityValid = await this.optionExists(city, this.dropdownCity);
+
       if (!isBranchValid || !isCityValid) {
         console.warn("No option is there either city or branch");
+        return false;
       }
       await this.dropdownCategory.click();
       await this.dropdownCategory.selectOption({ label: branch });
       await this.dropdownCity.click();
       await this.dropdownCity.selectOption({ label: city });
       await this.searchBtn.click();
+
+      return true;
     } catch (e) {
       console.log("Search Colleges failed", e);
     }
@@ -61,6 +67,6 @@ export class CollegeSearchPage extends BasePage {
 
   //assertion
   async isSearchResultVisible() {
-    return this.resultSection.isVisible();
+    return (await this.items.count()) > 0 ? true : false;
   }
 }

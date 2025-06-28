@@ -11,8 +11,5 @@ export const collegeFilterData = {
     { branch: "Architecture", city: "Agra" },
     { branch: "Engineering & Technology", city: "Agra" },
   ],
-  invalid: [
-    { branch: "", city: "" },
-    { branch: "", city: "" },
-  ],
+  invalid: [{ branch: "Doctor", city: "Thai" }],
 };
