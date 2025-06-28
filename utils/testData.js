@@ -13,3 +13,7 @@ export const collegeFilterData = {
   ],
   invalid: [{ branch: "Doctor", city: "Thai" }],
 };
+
+export const coursesFilterData = {
+  valid: [{ branch: "Engineering & Technology" }, { branch: "Vocational" }],
+};
