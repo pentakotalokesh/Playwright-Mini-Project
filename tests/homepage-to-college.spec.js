@@ -3,7 +3,7 @@ import { HomePage } from "../pages/HomePage";
 import { Navbar } from "../components/Navbar";
 import { CollegeSearchPage } from "../pages/CollegeSearchPage";
 import { collegeFilterData } from "../utils/testData";
-import { saveArrayToJson } from "../utils/filehelper";
+import { saveArrayToJson } from "../utils/fileHelper";
 
 test.describe("Navigate to Colleges and Search for Colleges", () => {
   let homePage;

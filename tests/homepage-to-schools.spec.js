@@ -1,6 +1,6 @@
 import { Navbar } from "../components/Navbar";
 import { test, expect } from "../fixtures/testSetup";
-import { HomePage } from "../pages/homePage";
+import { HomePage } from "../pages/HomePage";
 import { SchoolSearchPage } from "../pages/SchoolSearchPage";
 import { schoolFilterData } from "../utils/testData";
 

@@ -1,7 +1,7 @@
-import { expect, test } from "@playwright/test";
-import { blockAds } from "../utils/blockAds";
+import { expect, test as base } from "@playwright/test";
+import { blockAds } from "../utils/blockAds.js";
 
-const customTest = test.extend({
+const customTest = base.extend({
   context: async ({ browser }, use) => {
     const context = await browser.newContext({ ignoreHTTPSErrors: true });
     await use(context);
@@ -13,11 +13,9 @@ const customTest = test.extend({
     await page.close();
   },
 });
+
 customTest.beforeEach(async ({ page }) => {
   await blockAds(page);
 });
 
-module.exports = {
-  test: customTest,
-  expect,
-};
+export { customTest as test, expect };
