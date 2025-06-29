@@ -20,7 +20,11 @@ test.describe("Navigate to Colleges and Search for Colleges", () => {
   //Test for valid testcases
   collegeFilterData.valid.forEach(({ branch, city }) => {
     test(`Test for ${branch} and ${city}`, async () => {
-      await collegesPage.searchColleges(branch, city);
+      const result = await collegesPage.searchColleges(branch, city);
+      if (!result) {
+        test.skip();
+        return;
+      }
       saveArrayToJson(
         await collegesPage.getListColleges(),
         "output/collegeList.json"

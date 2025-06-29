@@ -4,12 +4,14 @@ import { BasePage } from "./BasePage";
 export class CollegeSearchPage extends BasePage {
   constructor(page) {
     super(page);
+
     // this.resultSection = this.page.locator("#pnllist .detail-list ul li");
     /*
     this.items = this.page.locator(
       ".box-content > .filter-result > .detail-list > #pnllist > .detail-list > ul > li"
     );*/
   }
+
   //searchColleges Method
   async searchColleges(branch, city) {
     try {
@@ -25,11 +27,17 @@ export class CollegeSearchPage extends BasePage {
         console.warn("No option is there either city or branch");
         return false;
       }
+      await this.dropdownCategory.waitFor({ state: "visible" });
       await this.dropdownCategory.click();
+
       await this.dropdownCategory.selectOption({ label: branch });
+      await this.dropdownCity.waitFor({ state: "visible" });
       await this.dropdownCity.click();
       await this.dropdownCity.selectOption({ label: city });
-      await this.searchBtn.click();
+      await Promise.all([
+        this.page.waitForNavigation({ waitUntil: "load" }),
+        this.searchBtn.click(),
+      ]);
 
       return true;
     } catch (e) {

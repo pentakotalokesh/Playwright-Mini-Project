@@ -8,6 +8,7 @@ export class BasePage {
   }
   //Check for dropdown option is there or not
   async optionExists(optionValue, dropdown) {
+    await dropdown.waitFor({ state: "visible" });
     const allOptions = await dropdown.locator("option").allTextContents();
     return allOptions.includes(optionValue);
   }

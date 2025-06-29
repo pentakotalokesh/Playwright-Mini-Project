@@ -24,11 +24,16 @@ export class SchoolSearchPage extends BasePage {
         console.warn("No option is there");
         return;
       }
+      await this.dropdownCategory.waitFor({ state: "visible" });
       await this.dropdownCategory.click();
       await this.dropdownCategory.selectOption({ label: category });
+      await this.dropdownCity.waitFor({ state: "visible" });
       await this.dropdownCity.click();
       await this.dropdownCity.selectOption({ label: city });
-      await this.searchBtn.click();
+      await Promise.all([
+        this.page.waitForNavigation({ waitUntil: "load" }),
+        this.searchBtn.click(),
+      ]);
     } catch (err) {
       console.log("search Schools Failed");
     }
