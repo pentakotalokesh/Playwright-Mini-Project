@@ -1,5 +1,6 @@
 export async function extractListTitleandLinks(items) {
   const colleges = [];
+  // await items.waitFor({ state: "visible" });
 
   const count = await items.count();
 
