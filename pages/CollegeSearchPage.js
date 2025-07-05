@@ -35,7 +35,7 @@ export class CollegeSearchPage extends BasePage {
       await this.dropdownCity.click();
       await this.dropdownCity.selectOption({ label: city });
       await Promise.all([
-        this.page.waitForNavigation({ waitUntil: "load" }),
+        this.page.waitForTimeout(2000), // Wait for 1 second to ensure the dropdowns are selected
         this.searchBtn.click(),
       ]);
 

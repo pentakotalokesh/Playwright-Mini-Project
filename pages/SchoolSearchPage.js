@@ -4,7 +4,7 @@ export class SchoolSearchPage extends BasePage {
   constructor(page) {
     super(page);
     this.searchBtn = page.locator("#btnSearch");
-    this.resultSection = page.locator(".box-content");
+    // this.resultSection = page.locator(".box-content");
   }
 
   //Search schools according to the category and city
@@ -34,6 +34,7 @@ export class SchoolSearchPage extends BasePage {
         this.page.waitForNavigation({ waitUntil: "load" }),
         this.searchBtn.click(),
       ]);
+      await this.page.waitForLoadState("networkidle");
     } catch (err) {
       console.log("search Schools Failed");
     }
