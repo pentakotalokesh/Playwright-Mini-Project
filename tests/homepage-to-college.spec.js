@@ -30,7 +30,7 @@ test.describe("Navigate to Colleges and Search for Colleges", () => {
         "output/collegeList.json"
       );
       const isVisible = await collegesPage.isSearchResultVisible();
-      expect(isVisible).toBe(true);
+      await expect(isVisible).toBe(true);
     });
   });
   // Test for Invalid testcases
@@ -39,7 +39,7 @@ test.describe("Navigate to Colleges and Search for Colleges", () => {
       const result = await collegesPage.searchColleges(branch, city);
       if (result === false) test.skip("Inavlid City or Branch");
       const isVisible = await collegesPage.isSearchResultVisible();
-      expect(isVisible).toBe(false);
+      await expect(isVisible).toBe(false);
     });
   });
 });
