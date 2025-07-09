@@ -18,7 +18,7 @@ test.describe("Navigate to Colleges and Search for Colleges", () => {
     collegesPage = new CollegeSearchPage(page);
   });
   //Test for valid testcases
-  collegeFilterData.valid.forEach(({ branch, city }) => {
+  collegeFilterData.valid.forEach(({ branch, city },index) => {
     test(`Test for ${branch} and ${city}`, async () => {
       const result = await collegesPage.searchColleges(branch, city);
       if (!result) {
@@ -27,7 +27,7 @@ test.describe("Navigate to Colleges and Search for Colleges", () => {
       }
       saveArrayToJson(
         await collegesPage.getListColleges(),
-        "output/collegeList.json"
+        `output/collegeList${index}.json`
       );
       const isVisible = await collegesPage.isSearchResultVisible();
       expect(isVisible).toBe(true);
