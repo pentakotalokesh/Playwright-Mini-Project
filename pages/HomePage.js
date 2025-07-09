@@ -5,7 +5,9 @@ export class HomePage {
     this.searchButton = page.locator("#btnSearch");
   }
   async goto() {
-    await this.page.goto("https://www.eduvidya.com/",{waitUntil: 'networkidle'});
+    await this.page.goto("https://www.eduvidya.com/", {
+      waitUntil: "networkidle",
+    });
   }
 
   async search(term) {
