@@ -27,6 +27,7 @@ export class CollegeSearchPage extends BasePage {
         console.warn("No option is there either city or branch");
         return false;
       }
+      await this.page.waitForLoadState('domcontentloaded');
       await this.dropdownCategory.waitFor({ state: "visible" });
       await this.dropdownCategory.click();
 
