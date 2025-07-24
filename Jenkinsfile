@@ -51,7 +51,7 @@ pipeline {
   post {
     success {
       slackSend(
-        channel: '#automation-status',
+        channel: '#all-the-automation-playbill',
         message: """
         🎉 *Build #${env.BUILD_NUMBER} — Success!*  
         ✅ All tests completed with zero regrets.  
@@ -64,7 +64,7 @@ pipeline {
 
     failure {
       slackSend(
-        channel: '#automation-status',
+        channel: '#all-the-automation-playbill',
         message: """
         💥 *Build #${env.BUILD_NUMBER} — Failed!*  
         ⚠️ Something went sideways.  
