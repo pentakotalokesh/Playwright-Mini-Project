@@ -43,3 +43,5 @@ test.describe("Navigate to Colleges and Search for Colleges", () => {
     });
   });
 });
+
+//Associate is very strong in basics. Theoretically he is able to explain. Has had good hands-on. Associate must focus in learning advanced skills as well. The purpose and usability of applying technology is missing.
