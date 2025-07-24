@@ -27,9 +27,7 @@ pipeline {
 
     stage('Clean Results Folder') {
       steps {
-        sh '''
-          rm -rf allure-results*
-        '''
+        sh 'rm -rf allure-results*'
       }
     }
 
@@ -51,6 +49,32 @@ pipeline {
   }
 
   post {
+    success {
+      slackSend(
+        channel: '#automation-status',
+        message: """
+        🎉 *Build #${env.BUILD_NUMBER} — Success!*  
+        ✅ All tests completed with zero regrets.  
+        📎 *Allure Report:* <${env.BUILD_URL}allure/|Click to view detailed results>  
+        🔗 *Build URL:* <${env.BUILD_URL}|Open in Jenkins>  
+        👀 Time to celebrate (or start the next one)!
+        """
+      )
+    }
+
+    failure {
+      slackSend(
+        channel: '#automation-status',
+        message: """
+        💥 *Build #${env.BUILD_NUMBER} — Failed!*  
+        ⚠️ Something went sideways.  
+        🪵 *Logs:* <${env.BUILD_URL}console|Check the console output>  
+        📎 *Allure (if available):* <${env.BUILD_URL}allure/|Attempt to view results>  
+        🧪 Grab a coffee. It’s debugging time.
+        """
+      )
+    }
+
     always {
       archiveArtifacts artifacts: "${RESULTS_DIR}/**", allowEmptyArchive: true
     }
