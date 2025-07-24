@@ -7,7 +7,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        git url: 'https://github.com/pentakotalokesh/playwrightfinalproject.git', branch: 'main'
+        git url: 'https://github.com/pentakotalokesh/Playwright-Mini-Project.git', branch: 'master'
       }
     }
 
