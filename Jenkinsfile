@@ -4,6 +4,10 @@ pipeline {
     nodejs 'NodeJS 23'
   }
 
+  environment {
+    RESULTS_DIR = "allure-results-${env.BUILD_NUMBER}"
+  }
+
   stages {
     stage('Checkout') {
       steps {
@@ -21,24 +25,34 @@ pipeline {
       }
     }
 
-    stage('Run Tests') {
+    stage('Clean Results Folder') {
       steps {
         sh '''
-          npx playwright test
+          rm -rf allure-results*
         '''
+      }
+    }
+
+    stage('Run Tests') {
+      steps {
+        sh """
+          mkdir -p ${RESULTS_DIR}
+          npx playwright test --reporter=allure-playwright
+          mv allure-results/* ${RESULTS_DIR}/ || true
+        """
       }
     }
 
     stage('Generate Allure Report') {
       steps {
-        allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
+        allure includeProperties: false, jdk: '', results: [[path: "${RESULTS_DIR}"]]
       }
     }
   }
 
   post {
     always {
-      archiveArtifacts artifacts: 'allure-results/**', allowEmptyArchive: true
+      archiveArtifacts artifacts: "${RESULTS_DIR}/**", allowEmptyArchive: true
     }
   }
 }
